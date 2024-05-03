@@ -80,7 +80,7 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
                 val post = repository.likeById(id)
                 _data.postValue(
                     _data.value?.copy(posts = _data.value?.posts.orEmpty()
-                        .filter { it.id != id } + post.copy()
+                        .map { if (it.id == id) post else it }
                     )
                 )
             } catch (e: IOException) {
