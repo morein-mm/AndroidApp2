@@ -5,17 +5,21 @@ import com.google.gson.reflect.TypeToken
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.Response
+import okhttp3.internal.EMPTY_REQUEST
 import ru.netology.nmedia.dto.Post
 import java.util.concurrent.TimeUnit
 
 
-class PostRepositoryImpl: PostRepository {
+class PostRepositoryImpl : PostRepository {
     private val client = OkHttpClient.Builder()
         .connectTimeout(30, TimeUnit.SECONDS)
         .build()
     private val gson = Gson()
     private val typeToken = object : TypeToken<List<Post>>() {}
+    private val typeTokenPost = object : TypeToken<Post>() {}
 
     companion object {
         private const val BASE_URL = "http://10.0.2.2:9999"
@@ -35,8 +39,42 @@ class PostRepositoryImpl: PostRepository {
             }
     }
 
-    override fun likeById(id: Long) {
-        // TODO: do this in homework
+    override fun likeById(id: Long) : Post {
+        val post = getById(id)
+        val empty: RequestBody = EMPTY_REQUEST
+
+        val request = if (post.likedByMe) {
+            Request.Builder()
+                .delete()
+                .url("${BASE_URL}/api/slow/posts/$id/likes")
+                .build()
+        } else {
+            Request.Builder()
+                .method("POST", EMPTY_REQUEST)
+                .url("${BASE_URL}/api/slow/posts/$id/likes")
+                .build()
+        }
+
+        return client.newCall(request)
+            .execute()
+            .let { it.body?.string() ?: throw RuntimeException("body is null") }
+            .let {
+                gson.fromJson(it, typeTokenPost.type)
+            }
+
+    }
+
+    override fun getById(id: Long): Post {
+        val request: Request = Request.Builder()
+            .url("${BASE_URL}/api/slow/posts/$id")
+            .build()
+
+        return client.newCall(request)
+            .execute()
+            .let { it.body?.string() ?: throw RuntimeException("body is null") }
+            .let {
+                gson.fromJson(it, typeTokenPost.type)
+            }
     }
 
     override fun save(post: Post) {
