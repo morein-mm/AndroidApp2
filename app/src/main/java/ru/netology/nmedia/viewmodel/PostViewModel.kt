@@ -37,18 +37,22 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun loadPosts() {
-        thread {
-            // Начинаем загрузку
-            _data.postValue(FeedModel(loading = true))
-            try {
-                // Данные успешно получены
-                val posts = repository.getAll()
-                FeedModel(posts = posts, empty = posts.isEmpty())
-            } catch (e: IOException) {
-                // Получена ошибка
-                FeedModel(error = true)
-            }.also(_data::postValue)
-        }
+        // Начинаем загрузку
+        _data.value(FeedModel(loading = true))
+        // Данные успешно получены
+        repository.getAll(
+            object : PostRepository.Callback<List<Post>> {
+                override fun onSuccess(result: List<Post>) {
+                    _data.postValue(FeedModel(posts = result, empty = result.isEmpty()))
+                }
+
+                override fun onError(exception: Exception) {
+                    _data.postValue(FeedModel(error = true))
+                }
+
+            }
+        )
+
     }
 
     fun save() {
@@ -105,4 +109,8 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
             }
         }
     }
+}
+
+private fun <T> MutableLiveData<T>.value(feedModel: T) {
+
 }
