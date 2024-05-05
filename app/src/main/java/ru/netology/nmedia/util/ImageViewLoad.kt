@@ -10,5 +10,6 @@ fun ImageView.load(url: String) {
         .placeholder(R.drawable.ic_downloading_24)
         .error(R.drawable.ic_error_outline_24)
         .timeout(30_000)
+        .circleCrop()
         .into(this)
 }
