@@ -3,6 +3,7 @@ package ru.netology.nmedia.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -46,6 +47,10 @@ class PostViewHolder(
             like.isChecked = post.likedByMe
             like.text = "${post.likes}"
             avatar.load("http://10.0.2.2:9999/avatars/${post.authorAvatar}")
+            if (post.attachment != null) {
+                imageAttachment.load("http://10.0.2.2:9999/name/${post.attachment.url}")
+                imageAttachment.isVisible = true
+            }
 
             menu.setOnClickListener {
                 PopupMenu(it.context, it).apply {
