@@ -48,7 +48,7 @@ class PostViewHolder(
             like.text = "${post.likes}"
             avatar.load("http://10.0.2.2:9999/avatars/${post.authorAvatar}")
             if (post.attachment != null) {
-                imageAttachment.load("http://10.0.2.2:9999/name/${post.attachment.url}")
+                imageAttachment.load("http://10.0.2.2:9999/images/${post.attachment.url}")
                 imageAttachment.isVisible = true
             }
 
