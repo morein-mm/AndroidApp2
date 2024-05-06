@@ -84,10 +84,10 @@
             android:id="@+id/imageAttachment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
+            android:contentDescription="@string/description_post_image_attachment"
             android:paddingTop="@dimen/common_spacing"
             android:paddingBottom="@dimen/common_spacing"
-            android:contentDescription="@string/description_post_image_attachment"
+            android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@id/content" />
 
         <androidx.constraintlayout.widget.Barrier
