@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.CardPostBinding
 import ru.netology.nmedia.dto.Post
+import ru.netology.nmedia.util.load
 
 interface OnInteractionListener {
     fun onLike(post: Post) {}
@@ -44,6 +45,7 @@ class PostViewHolder(
             // в адаптере
             like.isChecked = post.likedByMe
             like.text = "${post.likes}"
+            avatar.load("http://10.0.2.2:9999/avatars/${post.authorAvatar}")
 
             menu.setOnClickListener {
                 PopupMenu(it.context, it).apply {
