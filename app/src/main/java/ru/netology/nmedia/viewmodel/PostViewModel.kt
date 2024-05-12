@@ -40,14 +40,14 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
         // Начинаем загрузку
         _data.value = FeedModel(loading = true)
         // Данные успешно получены
-        repository.getAll(
+        repository.getAllAsync(
             object : PostRepository.Callback<List<Post>> {
                 override fun onSuccess(result: List<Post>) {
-                    _data.postValue(FeedModel(posts = result, empty = result.isEmpty()))
+                    _data.value = FeedModel(posts = result, empty = result.isEmpty())
                 }
 
                 override fun onError(exception: Exception) {
-                    _data.postValue(FeedModel(error = true))
+                    _data.value = FeedModel(error = true)
                 }
             }
         )

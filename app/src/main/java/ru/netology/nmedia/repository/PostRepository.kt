@@ -4,7 +4,8 @@ import ru.netology.nmedia.dto.Post
 import java.lang.Exception
 
 interface PostRepository {
-    fun getAll(callback: Callback<List<Post>>)
+    fun getAll()
+    fun getAllAsync(callback: Callback<List<Post>>)
     fun likeById(id: Long, likedByMe: Boolean, callback: Callback<Post>)
     fun save(post: Post, callback: Callback<Post>)
     fun removeById(id: Long, callback: Callback<Boolean>)
@@ -13,4 +14,6 @@ interface PostRepository {
         fun onSuccess(result: T)
         fun onError(exception: Exception)
     }
+
+
 }
