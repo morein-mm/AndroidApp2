@@ -36,7 +36,7 @@ interface PostApi {
     fun getAll(): Call<List<Post>>
 
     @POST("posts")
-    fun save(@Body post: Post): Call<List<Post>>
+    fun save(@Body post: Post): Call<Post>
 
     @POST("posts/{id}/likes")
     fun likeById(@Path("id") id: Long): Call<Post>
