@@ -1,6 +1,7 @@
 package ru.netology.nmedia.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.core.view.isVisible
@@ -50,8 +51,11 @@ class PostViewHolder(
             avatar.loadAvatar("http://10.0.2.2:9999/avatars/${post.authorAvatar}")
             if (post.attachment != null) {
                 imageAttachment.loadAttachment("http://10.0.2.2:9999/images/${post.attachment.url}")
-                imageAttachment.isVisible = true
+                imageAttachment.visibility = View.VISIBLE
+            } else {
+                imageAttachment.visibility = View.GONE
             }
+
 
             menu.setOnClickListener {
                 PopupMenu(it.context, it).apply {
