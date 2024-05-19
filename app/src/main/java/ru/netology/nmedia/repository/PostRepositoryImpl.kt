@@ -21,12 +21,13 @@ class PostRepositoryImpl : PostRepository {
                     call: Call<List<Post>>,
                     response: Response<List<Post>>
                 ) {
-                    if (!response.isSuccessful) {
-                        callback.onError(RuntimeException(response.errorBody()?.string()))
-                        return
-                    }
-                    val body = response.body() ?: throw RuntimeException("body is null")
                     try {
+                        if (!response.isSuccessful) {
+                            callback.onError(RuntimeException(response.errorBody()?.string()))
+                            return
+                        }
+                        val body = response.body() ?: throw RuntimeException("body is null")
+
                         callback.onSuccess(body)
                     } catch (e: Exception) {
                         callback.onError(e)
@@ -65,12 +66,12 @@ class PostRepositoryImpl : PostRepository {
                         call: Call<Post>,
                         response: Response<Post>
                     ) {
-                        if (!response.isSuccessful) {
-                            callback.onError(RuntimeException(response.errorBody()?.string()))
-                            return
-                        }
-                        val body = response.body() ?: throw RuntimeException("body is null")
                         try {
+                            if (!response.isSuccessful) {
+                                callback.onError(RuntimeException(response.errorBody()?.string()))
+                                return
+                            }
+                            val body = response.body() ?: throw RuntimeException("body is null")
                             callback.onSuccess(body)
                         } catch (e: Exception) {
                             callback.onError(e)
@@ -91,12 +92,13 @@ class PostRepositoryImpl : PostRepository {
                         call: Call<Post>,
                         response: Response<Post>
                     ) {
-                        if (!response.isSuccessful) {
-                            callback.onError(RuntimeException(response.errorBody()?.string()))
-                            return
-                        }
-                        val body = response.body() ?: throw RuntimeException("body is null")
                         try {
+                            if (!response.isSuccessful) {
+                                callback.onError(RuntimeException(response.errorBody()?.string()))
+                                return
+                            }
+                            val body = response.body() ?: throw RuntimeException("body is null")
+
                             callback.onSuccess(body)
                         } catch (e: Exception) {
                             callback.onError(e)
@@ -124,12 +126,12 @@ class PostRepositoryImpl : PostRepository {
                     call: Call<Post>,
                     response: Response<Post>
                 ) {
-                    if (!response.isSuccessful) {
-                        callback.onError(RuntimeException(response.errorBody()?.string()))
-                        return
-                    }
-                    val body = response.body() ?: throw RuntimeException("body is null")
                     try {
+                        if (!response.isSuccessful) {
+                            callback.onError(RuntimeException(response.errorBody()?.string()))
+                            return
+                        }
+                        val body = response.body() ?: throw RuntimeException("body is null")
                         callback.onSuccess(body)
                     } catch (e: Exception) {
                         callback.onError(e)
@@ -156,12 +158,12 @@ class PostRepositoryImpl : PostRepository {
                     call: Call<Unit>,
                     response: Response<Unit>
                 ) {
-                    if (!response.isSuccessful) {
-                        callback.onError(RuntimeException(response.errorBody()?.string()))
-                        return
-                    }
-                    val body = response.body() ?: throw RuntimeException("body is null")
                     try {
+                        if (!response.isSuccessful) {
+                            callback.onError(RuntimeException(response.errorBody()?.string()))
+                            return
+                        }
+                        val body = response.body() ?: throw RuntimeException("body is null")
                         callback.onSuccess(body)
                     } catch (e: Exception) {
                         callback.onError(e)

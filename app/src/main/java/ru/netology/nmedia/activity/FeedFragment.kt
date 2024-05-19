@@ -22,9 +22,7 @@ class FeedFragment : Fragment() {
     private val viewModel: PostViewModel by activityViewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         val binding = FragmentFeedBinding.inflate(inflater, container, false)
 
@@ -71,10 +69,8 @@ class FeedFragment : Fragment() {
 
         viewModel.error.observe(viewLifecycleOwner) {
             Snackbar.make(
-                binding.root,
-                it.message ?: getString(R.string.error_loading),
-                Snackbar.LENGTH_SHORT
-            ).show()
+                binding.root, it.message ?: getString(R.string.error_loading), Snackbar.LENGTH_SHORT
+            ).setAnchorView(binding.fab).show()
         }
 
         return binding.root
